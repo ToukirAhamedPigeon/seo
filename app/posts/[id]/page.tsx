@@ -7,14 +7,17 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 
+export const revalidate = 86400 // 24 * 60 * 60 we cached the data for 24 Hours. After 24 Hours It will be refreshed.
+
 const getPost = cache(async(postId:string)=>{
   return await axios.get(`https://dummyjson.com/posts/${postId}`);
 })
 
 export async function generateStaticParam(){
+  // return [] //If we return Empty Array It will cache the page after loaded once.  
   const response = await axios.get('https://dummyjson.com/posts');
   const {posts}=await response.data;
-  return posts.map(({id}:{id:String})=>id).slice(0,5)
+  return posts.map(({id}:{id:String})=>id).slice(0,5) // we sliced and took only 5 records to cache on the first attempt. The rest will be rendered & cached at first access.
 }
 
 export async function generateMetadata({ params }:{params: Promise<{ id: string }>}):Promise<Metadata>{
