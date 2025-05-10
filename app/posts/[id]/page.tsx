@@ -14,7 +14,7 @@ const getPost = cache(async(postId:string)=>{
 export async function generateStaticParam(){
   const response = await axios.get('https://dummyjson.com/posts');
   const {posts}=await response.data;
-  return posts.map(({id}:{id:String})=>id)
+  return posts.map(({id}:{id:String})=>id).slice(0,5)
 }
 
 export async function generateMetadata({ params }:{params: Promise<{ id: string }>}):Promise<Metadata>{
