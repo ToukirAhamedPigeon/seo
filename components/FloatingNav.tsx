@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { HomeIcon, InfoIcon } from 'lucide-react'
+import { HomeIcon, InfoIcon, LockIcon } from 'lucide-react'
 
 export default function FloatingNav() {
   const pathname = usePathname()
@@ -12,6 +12,7 @@ export default function FloatingNav() {
     <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white shadow-xl border border-gray-200 rounded-full px-6 py-2 flex gap-8 items-center backdrop-blur-md">
       <NavLink href="/" icon={<HomeIcon className="w-5 h-5" />} label="Home" active={pathname === '/'} />
       <NavLink href="/about" icon={<InfoIcon className="w-5 h-5" />} label="About" active={pathname === '/about'} />
+      <NavLink href="/privacy" icon={<LockIcon className="w-5 h-5" />} label="Privacy" active={pathname === '/privacy'} />
     </nav>
   )
 }

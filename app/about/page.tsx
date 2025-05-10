@@ -1,7 +1,11 @@
-'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import { Metadata } from 'next';
+
+  export const metadata: Metadata = {
+  title: "About",
+  };
 
 export default function AboutPage() {
   return (
