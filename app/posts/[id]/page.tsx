@@ -11,6 +11,12 @@ const getPost = cache(async(postId:string)=>{
   return await axios.get(`https://dummyjson.com/posts/${postId}`);
 })
 
+export async function generateStaticParam(){
+  const response = await axios.get('https://dummyjson.com/posts');
+  const {posts}=await response.data;
+  return posts.map(({id}:{id:String})=>id)
+}
+
 export async function generateMetadata({ params }:{params: Promise<{ id: string }>}):Promise<Metadata>{
   const { id } = await params;
   const res = await getPost(id);
